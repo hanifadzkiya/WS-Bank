@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class DatabaseConnector {
     private static final int CREDIT_TRANSACTION_TYPE = 1;
 
-    private List<Transaction> executeQuery(String query, int type) throws Exception{
+    private static List<Transaction> executeQuery(String query, int type) throws Exception{
         String url = "jdbc:mysql://localhost:3306/wsbank";
         String user = "root";
         String password = "";
@@ -58,7 +58,7 @@ public class DatabaseConnector {
         }
     }
 
-    private List<Transaction> getCreditTransactions(TransactionRequest transactionRequest) throws Exception{
+    private static List<Transaction> getCreditTransactions(TransactionRequest transactionRequest) throws Exception{
         String nomorTekait = transactionRequest.getNomorTerkait();
         Double jumlah = transactionRequest.getJumlah();
         String startTime = transactionRequest.getStartTime();
@@ -73,6 +73,16 @@ public class DatabaseConnector {
             Logger lgr = Logger.getLogger(Version.class.getName());
             lgr.log(Level.SEVERE, e.getMessage(), e);
             throw e;
+        }
+    }
+
+    public static boolean isExistCreditTransaction(TransactionRequest transactionRequest){
+        try{
+            List<Transaction> transactions = getCreditTransactions(transactionRequest);
+            boolean exist = !transactions.isEmpty();
+            return exist;
+        } catch (Exception e){
+            return false;
         }
     }
 }

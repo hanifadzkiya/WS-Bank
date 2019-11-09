@@ -1,0 +1,30 @@
+package publisher;
+
+import ws.util.DatabaseConnector;
+import ws.util.TransactionRequest;
+import ws.util.TransactionRequestBuilder;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.xml.ws.Endpoint;
+
+@WebService()
+public class BankWebService {
+    @WebMethod
+    public boolean isCreditTransactionExist(String nomorTerkait, Double jumlah, String startTime, String endTime) {
+        TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
+                .setStartTime(startTime)
+                .setEndTime(endTime)
+                .build();
+
+        boolean result = false;
+        System.out.println(result);
+        return result;
+    }
+
+    public static void main(String[] argv) {
+        Object implementor = new BankWebService ();
+        String address = "http://localhost:9000/wsbank";
+        Endpoint.publish(address, implementor);
+    }
+}
