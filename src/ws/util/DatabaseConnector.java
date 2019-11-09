@@ -64,6 +64,7 @@ public class DatabaseConnector {
         String startTime = transactionRequest.getStartTime();
         String endTime = transactionRequest.getEndTime();
 
+//        String query = "SELECT * FROM transaksi WHERE jenis = 'kredit';";
         String query = "SELECT * FROM transaksi WHERE jenis = 'kredit' AND nomor_terkait = '";
         query = query + nomorTekait + "' AND jumlah = " + jumlah.toString() + "AND waktu_transaksi > '" + startTime + "'";
         query = query + "AND waktu_transaksi < '" + endTime + "';";
@@ -76,13 +77,13 @@ public class DatabaseConnector {
         }
     }
 
-    public static boolean isExistCreditTransaction(TransactionRequest transactionRequest){
+    public static String isExistCreditTransaction(TransactionRequest transactionRequest){
         try{
             List<Transaction> transactions = getCreditTransactions(transactionRequest);
             boolean exist = !transactions.isEmpty();
-            return exist;
+            return transactions.get(0).getNomorTerkait();
         } catch (Exception e){
-            return false;
+            return "Not found: " + e.getMessage();
         }
     }
 }

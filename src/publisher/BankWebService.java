@@ -11,13 +11,13 @@ import javax.xml.ws.Endpoint;
 @WebService()
 public class BankWebService {
     @WebMethod
-    public boolean isCreditTransactionExist(String nomorTerkait, Double jumlah, String startTime, String endTime) {
+    public String isCreditTransactionExist(String nomorTerkait, Double jumlah, String startTime, String endTime) {
         TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
                 .setStartTime(startTime)
                 .setEndTime(endTime)
                 .build();
 
-        boolean result = false;
+        String result = DatabaseConnector.isExistCreditTransaction(transactionRequest);
         System.out.println(result);
         return result;
     }
