@@ -1,6 +1,6 @@
 package publisher;
 
-import ws.util.DatabaseConnector;
+import ws.service.CreditTransactionService;
 import ws.util.TransactionRequest;
 import ws.util.TransactionRequestBuilder;
 
@@ -17,7 +17,7 @@ public class BankWebService {
                 .setEndTime(endTime)
                 .build();
 
-        String result = DatabaseConnector.isExistCreditTransaction(transactionRequest);
+        String result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
         System.out.println(result);
         return result;
     }

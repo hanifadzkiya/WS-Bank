@@ -1,8 +1,9 @@
-package ws.util;
+package ws.service;
 
 import jdk.nashorn.internal.runtime.Version;
 import ws.model.Transaction;
 import ws.model.TransactionBuilder;
+import ws.util.TransactionRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DatabaseConnector {
+public class CreditTransactionService {
     private static final int CREDIT_TRANSACTION_TYPE = 1;
 
     private static List<Transaction> executeQuery(String query, int type) throws Exception{
@@ -23,8 +24,7 @@ public class DatabaseConnector {
             Connection con = DriverManager.getConnection(url, user, password);
 
             Statement st = con.createStatement();
-            String sql = (query);
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = st.executeQuery(query);
 
             if(type == CREDIT_TRANSACTION_TYPE){
                 List<Transaction> transactions = new ArrayList<Transaction>();
@@ -49,7 +49,7 @@ public class DatabaseConnector {
                 return transactions;
             } else {
                 con.close();
-                throw new Exception();
+                throw new Exception("Unknown type of transaction");
             }
         } catch (Exception e) {
             Logger lgr = Logger.getLogger(Version.class.getName());
@@ -81,9 +81,14 @@ public class DatabaseConnector {
         try{
             List<Transaction> transactions = getCreditTransactions(transactionRequest);
             boolean exist = !transactions.isEmpty();
-            return transactions.get(0).getNomorTerkait();
+            if(exist){
+                String nomorTerkait = transactions.get(0).getNomorTerkait();
+                return "Transaksi dengan nomor terkait " + nomorTerkait + " ditemukan";
+            } else{
+                return "Tidak ada hasil dengan nomor: " + transactionRequest.getNomorTerkait();
+            }
         } catch (Exception e){
-            return "Not found: " + e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 }
