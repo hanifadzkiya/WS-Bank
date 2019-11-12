@@ -15,9 +15,9 @@ public class CreditTransactionService {
     private static final int CREDIT_TRANSACTION_TYPE = 1;
 
     private static List<Transaction> executeQuery(String query, int type) throws Exception{
-        String url = "jdbc:mysql://localhost:3306/wsbank";
-        String user = "root";
-        String password = "";
+        String url = "jdbc:mysql://database-1.cxqar33fjxpj.ap-southeast-1.rds.amazonaws.com:3306/wsbank";
+        String user = "engimabp";
+        String password = "Bankpro234";
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
