@@ -1,11 +1,7 @@
 package publisher;
 
-import ws.model.Rekening;
-import ws.service.CreditTransactionService;
 import ws.service.RekeningService;
 import ws.util.RekeningRequest;
-import ws.util.TransactionRequest;
-import ws.util.TransactionRequestBuilder;
 
 import ws.util.RekeningRequestBuilder;
 
