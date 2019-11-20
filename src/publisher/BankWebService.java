@@ -20,11 +20,11 @@ import java.util.List;
 @WebService()
 public class BankWebService {
     @WebMethod
-    public String isRekeningExist(String nomorRekening) {
+    public boolean isRekeningExist(String nomorRekening) {
         RekeningRequest rekeningRequest = new RekeningRequestBuilder(nomorRekening)
                 .build();
 
-        String result = RekeningService.isExistNomorRekening(rekeningRequest);
+        boolean result = RekeningService.isExistNomorRekening(rekeningRequest);
         return result;
     }
 

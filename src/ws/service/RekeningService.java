@@ -74,17 +74,17 @@ public class RekeningService {
     }
 
 
-    public static String isExistNomorRekening(RekeningRequest rekeningRequest) {
+    public static boolean isExistNomorRekening(RekeningRequest rekeningRequest) {
         try{
             List<Rekening> arrRekening = getRekeningByNoRekening(rekeningRequest);
             boolean exist = !arrRekening.isEmpty();
             if(exist){
-                return "true";
+                return true;
             } else{
-                return "false";
+                return false;
             }
         } catch (Exception e){
-            return "Error: " + e.getMessage();
+            return false;
         }
     }
     public static Rekening getRekeningDetail(RekeningRequest rekeningRequest){
