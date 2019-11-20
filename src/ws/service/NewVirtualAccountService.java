@@ -5,6 +5,7 @@ import jdk.nashorn.internal.runtime.Version;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Timestamp;
 
 public class NewVirtualAccountService{
 
@@ -17,7 +18,8 @@ public class NewVirtualAccountService{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(url, user, password);
 
-            long cons = 1999072746;
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            long cons = timestamp.getTime();
             long newVirtualAccountNumber = Long.parseLong(nomorRekening) + cons;
 
             PreparedStatement ps = con.prepareStatement
