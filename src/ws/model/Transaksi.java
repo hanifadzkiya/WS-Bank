@@ -2,26 +2,26 @@ package ws.model;
 
 public class Transaksi {
     public int id;
-    public int idNasabah;
+    public String noRekening_1;
     public String jenis;
     public int jumlah;
-    public String nomorTerkait;
+    public String noRekening_2;
     public String waktuTransaksi;
 
     public Transaksi(TransaksiBuilder transaksiBuilder) {
         this.id = transaksiBuilder.getId();
-        this.idNasabah = transaksiBuilder.getIdNasabah();
+        this.noRekening_1 = transaksiBuilder.getNoRekening_1();
         this.jenis = transaksiBuilder.getJenis();
         this.jumlah = transaksiBuilder.getJumlah();
-        this.nomorTerkait = transaksiBuilder.getNomorTerkait();
+        this.noRekening_2 = transaksiBuilder.getNoRekening_2();
         this.waktuTransaksi = transaksiBuilder.getWaktuTransaksi();
     }
     public int getId() {
         return id;
     }
 
-    public int getIdNasabah() {
-        return idNasabah;
+    public String getNoRekening_1() {
+        return noRekening_1;
     }
 
     public String getJenis() {
@@ -32,8 +32,8 @@ public class Transaksi {
         return jumlah;
     }
 
-    public String getNomorTerkait() {
-        return nomorTerkait;
+    public String getNoRekening_2() {
+        return noRekening_2;
     }
 
     public String getWaktuTransaksi() {

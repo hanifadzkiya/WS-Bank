@@ -2,10 +2,10 @@ package ws.model;
 
 public class TransaksiBuilder {
     private int id;
-    private int idNasabah;
+    private String noRekening_1;
     private String jenis;
     private int jumlah;
-    public String nomorTerkait;
+    public String noRekening_2;
     public String waktuTransaksi;
 
     public TransaksiBuilder setId(int id) {
@@ -13,8 +13,8 @@ public class TransaksiBuilder {
         return this;
     }
 
-    public TransaksiBuilder setIdNasabah(int idNasabah) {
-        this.idNasabah = idNasabah;
+    public TransaksiBuilder setNoRekening_1(String noRekening_1) {
+        this.noRekening_1 = noRekening_1;
         return this;
     }
 
@@ -28,8 +28,8 @@ public class TransaksiBuilder {
         return this;
     }
 
-    public TransaksiBuilder setNomorTerkait(String nomorTerkait) {
-        this.nomorTerkait = nomorTerkait;
+    public TransaksiBuilder setNoRekening_2(String noRekening_2) {
+        this.noRekening_2 = noRekening_2;
         return this;
     }
 
@@ -42,8 +42,8 @@ public class TransaksiBuilder {
         return id;
     }
 
-    public int getIdNasabah() {
-        return idNasabah;
+    public String getNoRekening_1() {
+        return noRekening_1;
     }
 
     public String getJenis() {
@@ -54,20 +54,20 @@ public class TransaksiBuilder {
         return jumlah;
     }
 
-    public String getNomorTerkait() {
-        return nomorTerkait;
+    public String getNoRekening_2() {
+        return noRekening_2;
     }
 
     public String getWaktuTransaksi() {
         return waktuTransaksi;
     }
 
-    public TransaksiBuilder(int id, int idNasabah, String jenis, int jumlah, String nomorTerkait, String waktuTransaksi) {
+    public TransaksiBuilder(int id, String noRekening_1, String jenis, int jumlah, String noRekening_2, String waktuTransaksi) {
         this.id = id;
-        this.idNasabah = idNasabah;
+        this.noRekening_1 = noRekening_1;
         this.jenis = jenis;
         this.jumlah = jumlah;
-        this.nomorTerkait = nomorTerkait;
+        this.noRekening_2 = noRekening_2;
         this.waktuTransaksi = waktuTransaksi;
     }
 

@@ -3,7 +3,6 @@ package ws.service;
 import jdk.nashorn.internal.runtime.Version;
 import ws.model.Rekening;
 import ws.model.RekeningBuilder;
-import ws.util.NasabahRequest;
 import ws.util.RekeningRequest;
 
 import java.sql.Connection;
@@ -42,8 +41,9 @@ public class RekeningService {
                 String nama = rs.getString("nama");
                 String noRekening = rs.getString("no_rekening");
                 String namaBank = rs.getString("nama_bank");
+                int saldo = rs.getInt("saldo");
 
-                Rekening rekening = new RekeningBuilder(id, nama, noRekening, namaBank)
+                Rekening rekening = new RekeningBuilder(id, nama, noRekening, namaBank, saldo)
                         .build();
 
                 arrRekening.add(rekening);
@@ -56,24 +56,10 @@ public class RekeningService {
         }
     }
 
-    private static int getSaldoFromResultSet(ResultSet rs) throws Exception{
-        try {
-            int saldo;
-            while(rs.next()){
-                saldo = rs.getInt("saldo");
-            }
-            return 2000;
-        } catch (Exception e) {
-            Logger lgr = Logger.getLogger(Version.class.getName());
-            lgr.log(Level.SEVERE, e.getMessage(), e);
-            throw e;
-        }
-    }
-
     private static List<Rekening> getRekeningByNoRekening(RekeningRequest rekeningRequest) throws Exception{
-        String nomorTekait = rekeningRequest.getNoRekening();
+        String noRekening = rekeningRequest.getNoRekening();
 
-        String query = "SELECT * FROM nasabah WHERE no_rekening = " + rekeningRequest.getNoRekening();
+        String query = "SELECT * FROM nasabah WHERE no_rekening = " + noRekening;
         try{
             con = DriverManager.getConnection(url, user, password);
             ResultSet rs = executeQuery(query);
@@ -85,64 +71,11 @@ public class RekeningService {
             lgr.log(Level.SEVERE, e.getMessage(), e);
             throw e;
         }
-    }
-
-    private static List<Rekening> getRekeningByidNasabah(NasabahRequest nasabahRequest) throws Exception{
-         String idNasabah = nasabahRequest.getIdNasabah();
-
-        String query = "SELECT * FROM nasabah WHERE id = " + idNasabah;
-        try{
-            con = DriverManager.getConnection(url, user, password);
-            ResultSet rs = executeQuery(query);
-            List<Rekening> arrRekening = getListRekeningFromResultSet(rs);
-            con.close();
-            return arrRekening;
-        } catch (Exception e){
-            Logger lgr = Logger.getLogger(Version.class.getName());
-            lgr.log(Level.SEVERE, e.getMessage(), e);
-            throw e;
-        }
-    }
-
-    public static int getSaldoByNoRekeningQuery(RekeningRequest rekeningRequest) throws Exception{
-        String nomorTekait = rekeningRequest.getNoRekening();
-
-        String query = "SELECT * FROM nasabah WHERE no_rekening = " + rekeningRequest.getNoRekening();
-        try{
-            con = DriverManager.getConnection(url, user, password);
-            ResultSet rs = executeQuery(query);
-            List<Rekening> arrRekening = getListRekeningFromResultSet(rs);
-            con.close();
-            return 20000;
-        } catch (Exception e){
-            Logger lgr = Logger.getLogger(Version.class.getName());
-            lgr.log(Level.SEVERE, e.getMessage(), e);
-            throw e;
-        }
-    }
-
-
-    public static int getSaldoByIdNasabah(NasabahRequest nasabahRequest){
-        return 2000;
     }
 
     public static Rekening getRekeningDetail(RekeningRequest rekeningRequest){
         try{
             List<Rekening> arrRekening = getRekeningByNoRekening(rekeningRequest);
-            boolean exist = !arrRekening.isEmpty();
-            if(exist){
-                return arrRekening.get(0);
-            } else{
-                return new Rekening();
-            }
-        } catch (Exception e){
-            return new Rekening();
-        }
-    }
-
-    public static Rekening getRekeningDetailByIdNasabah(NasabahRequest nasabahRequest){
-        try{
-            List<Rekening> arrRekening = getRekeningByidNasabah(nasabahRequest);
             boolean exist = !arrRekening.isEmpty();
             if(exist){
                 return arrRekening.get(0);

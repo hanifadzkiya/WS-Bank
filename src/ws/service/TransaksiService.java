@@ -1,9 +1,11 @@
 package ws.service;
 
 import jdk.nashorn.internal.runtime.Version;
+import ws.model.Rekening;
 import ws.model.Transaksi;
 import ws.model.TransaksiBuilder;
 import ws.model.Transaksi;
+import ws.util.RekeningRequest;
 import ws.util.TransaksiRequest;
 
 import java.sql.Connection;
@@ -31,13 +33,13 @@ public class TransaksiService {
             List<Transaksi> arrTransaksi = new ArrayList<Transaksi>();
             while(rs.next()){
                 int id = rs.getInt("id");
-                int idNasabah = rs.getInt("id_nasabah");
+                String noRekening_1 = rs.getString("no_rekening_1");
                 String jenis = rs.getString("jenis");
                 int jumlah = rs.getInt("jumlah");
-                String nomorTerkait = rs.getString("nomor_terkait");
+                String noRekening_2 = rs.getString("no_rekening_2");
                 String waktuTransaksi = rs.getString("waktu_transaksi");
 
-                Transaksi transaksi = new TransaksiBuilder(id, idNasabah, jenis, jumlah, nomorTerkait, waktuTransaksi)
+                Transaksi transaksi = new TransaksiBuilder(id, noRekening_1, jenis, jumlah, noRekening_2, waktuTransaksi)
                         .build();
 
                 arrTransaksi.add(transaksi);
@@ -50,10 +52,10 @@ public class TransaksiService {
             throw e;
         }
     }
-    private static List<Transaksi> getTransaksiByIdNasabah(TransaksiRequest transaksiRequest) throws Exception{
-        String idNasabah = transaksiRequest.getIdNasabah();
+    private static List<Transaksi> getTransaksiByNoRekening(RekeningRequest rekeningRequest) throws Exception{
+        String noRekening = rekeningRequest.getNoRekening();
 
-        String query = "SELECT * FROM transaksi WHERE id_nasabah = " + idNasabah;
+        String query = "SELECT * FROM transaksi WHERE no_rekening_1 = " + noRekening;
         try{
             return executeQuery(query);
         } catch (Exception e){
@@ -63,9 +65,9 @@ public class TransaksiService {
         }
     }
 
-    public static List<Transaksi> getAllNasabahTransaksi(TransaksiRequest transaksiRequest){
+    public static List<Transaksi> getAllNasabahTransaksi(RekeningRequest rekeningRequest){
         try{
-            List<Transaksi> arrTransaksi = getTransaksiByIdNasabah(transaksiRequest);
+            List<Transaksi> arrTransaksi = getTransaksiByNoRekening(rekeningRequest);
             return arrTransaksi;
         } catch (Exception e){
             return null;
