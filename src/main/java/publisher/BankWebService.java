@@ -12,6 +12,7 @@ import ws.service.CreditTransactionService;
 import ws.util.TransactionRequest;
 import ws.util.TransactionRequestBuilder;
 import ws.service.NewVirtualAccountService;
+import ws.service.TransferService;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -26,6 +27,20 @@ public class BankWebService {
         return result;
     }
 
+    @WebMethod
+    public String transfer(String nomorPengirim, String nomorPenerima, long nominal) throws Exception {
+        boolean nomorValid = TransferService.validate(nomorPengirim, nomorPenerima, nominal);
+        if (nomorValid) {
+            TransferService.Transfer(nomorPengirim, nomorPenerima, nominal);
+            String result = "Transfer berhasil";
+            System.out.println(result);
+            return result;
+        } else {
+            String result = "Transfer gagal";
+            System.out.println(result);
+            return result;
+        }
+    }
 
     @WebMethod
     public boolean isRekeningExist(String nomorRekening) {
