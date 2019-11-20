@@ -11,6 +11,7 @@ import ws.service.TransaksiService;
 import ws.service.CreditTransactionService;
 import ws.util.TransactionRequest;
 import ws.util.TransactionRequestBuilder;
+import ws.service.NewVirtualAccountService;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -19,6 +20,13 @@ import java.util.List;
 
 @WebService()
 public class BankWebService {
+    @WebMethod
+    public String newVirtualAccount(String nomorRekening) throws Exception {
+        String result = NewVirtualAccountService.createNew(nomorRekening);
+        return result;
+    }
+
+
     @WebMethod
     public boolean isRekeningExist(String nomorRekening) {
         RekeningRequest rekeningRequest = new RekeningRequestBuilder(nomorRekening)
