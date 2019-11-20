@@ -4,11 +4,6 @@
 
     <endpoint
             name='HelloWorld'
-            implementation='publisher.HelloWorld'
+            implementation='example.HelloWorld'
             url-pattern='/services/HelloWorld'/>
-
-    <endpoint
-            name='wsbank'
-            implementation='publisher.BankWebService'
-            url-pattern='/services/wsbank'/>
 </endpoints>

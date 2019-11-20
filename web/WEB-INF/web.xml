@@ -17,5 +17,4 @@
         <servlet-name>WSServlet</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
-
 </web-app>
