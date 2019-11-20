@@ -2,7 +2,7 @@ package ws.model;
 
 public class Transaction {
     private int id;
-    private int idNasabah;
+    private String idNasabah;
     private String jenis;
     private Double jumlah;
     private String nomorTerkait;
@@ -21,7 +21,7 @@ public class Transaction {
         return id;
     }
 
-    public int getIdNasabah() {
+    public String getIdNasabah() {
         return idNasabah;
     }
 

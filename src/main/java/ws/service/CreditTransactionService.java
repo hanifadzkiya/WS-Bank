@@ -30,10 +30,10 @@ public class CreditTransactionService {
                 List<Transaction> transactions = new ArrayList<Transaction>();
                 while(rs.next()){
                     int id = rs.getInt("id");
-                    int idNasabah = rs.getInt("id_nasabah");
+                    String idNasabah = rs.getString("no_rekening_1");
                     String jenis = rs.getString("jenis");
                     Double jumlah = rs.getDouble("jumlah");
-                    String nomorTerkait = rs.getString("nomor_terkait");
+                    String nomorTerkait = rs.getString("no_rekening_2");
                     String waktuTransaksi = rs.getString("waktu_transaksi");
 
                     Transaction transaction = new TransactionBuilder(id, idNasabah)
@@ -65,9 +65,9 @@ public class CreditTransactionService {
         String endTime = transactionRequest.getEndTime();
 
 //        String query = "SELECT * FROM transaksi WHERE jenis = 'kredit';";
-        String query = "SELECT * FROM transaksi WHERE jenis = 'kredit' AND nomor_terkait = '";
-        query = query + nomorTekait + "' AND jumlah = " + jumlah.toString() + "AND waktu_transaksi > '" + startTime + "'";
-        query = query + "AND waktu_transaksi < '" + endTime + "';";
+        String query = "SELECT * FROM transaksi WHERE jenis = 'kredit' AND no_rekening_2 = '";
+        query = query + nomorTekait + "' AND jumlah = " + jumlah.toString() + "AND waktu_transaksi >= '" + startTime + "'";
+        query = query + "AND waktu_transaksi <= '" + endTime + "';";
         try{
             return executeQuery(query, CREDIT_TRANSACTION_TYPE);
         } catch (Exception e){

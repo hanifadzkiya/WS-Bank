@@ -2,13 +2,13 @@ package ws.model;
 
 public class TransactionBuilder {
     private int id;
-    private int idNasabah;
+    private String idNasabah;
     private String jenis;
     private Double jumlah;
     private String nomorTerkait;
     private String waktuTransaksi;
 
-    public TransactionBuilder(int id, int idNasabah){
+    public TransactionBuilder(int id, String idNasabah){
         this.id = id;
         this.idNasabah = idNasabah;
     }
@@ -41,7 +41,7 @@ public class TransactionBuilder {
         return id;
     }
 
-    public int getIdNasabah() {
+    public String getIdNasabah() {
         return idNasabah;
     }
 
