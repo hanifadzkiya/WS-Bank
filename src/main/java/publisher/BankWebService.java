@@ -31,13 +31,14 @@ public class BankWebService {
         return result;
     }
 
-    public String isCreditTransactionExist(String nomorTerkait, Double jumlah, String startTime, String endTime) {
+    @WebMethod
+    public Boolean isCreditTransactionExist(String nomorTerkait, Double jumlah, String startTime, String endTime) {
         TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
                 .setStartTime(startTime)
                 .setEndTime(endTime)
                 .build();
 
-        String result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
+        Boolean result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
         System.out.println(result);
         return result;
     }

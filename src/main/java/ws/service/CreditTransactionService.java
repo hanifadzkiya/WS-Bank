@@ -77,18 +77,21 @@ public class CreditTransactionService {
         }
     }
 
-    public static String isExistCreditTransaction(TransactionRequest transactionRequest){
+    public static Boolean isExistCreditTransaction(TransactionRequest transactionRequest){
         try{
             List<Transaction> transactions = getCreditTransactions(transactionRequest);
             boolean exist = !transactions.isEmpty();
             if(exist){
                 String nomorTerkait = transactions.get(0).getNomorTerkait();
-                return "Transaksi dengan nomor terkait " + nomorTerkait + " ditemukan";
+//                return "Transaksi dengan nomor terkait " + nomorTerkait + " ditemukan";
+                return true;
             } else{
-                return "Tidak ada hasil dengan nomor: " + transactionRequest.getNomorTerkait();
+//                return "Tidak ada hasil dengan nomor: " + transactionRequest.getNomorTerkait();
+                return false;
             }
         } catch (Exception e){
-            return "Error: " + e.getMessage();
+//            return "Error: " + e.getMessage();
+            return false;
         }
     }
 }
