@@ -15,31 +15,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RekeningService {
-    private static List<Rekening> executeQuery(String query) throws Exception{
-        String url = "jdbc:mysql://localhost:3306/wsbank";
-        String user = "root";
-        String password = "1256";
-
+    private static Connection con;
+    private static String url = "jdbc:mysql://localhost:3306/wsbank";
+    private static String user = "root";
+    private static String password = "1256";
+    private static ResultSet executeQuery(String query) throws Exception{
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection(url, user, password);
 
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
+            return rs;
+        } catch (Exception e) {
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+            throw e;
+        }
+    }
 
+    private static List<Rekening> getListRekeningFromResultSet(ResultSet rs) throws Exception{
+        try {
             List<Rekening> arrRekening = new ArrayList<Rekening>();
             while(rs.next()){
                 int id = rs.getInt("id");
                 String nama = rs.getString("nama");
                 String noRekening = rs.getString("no_rekening");
                 String namaBank = rs.getString("nama_bank");
+                int saldo = rs.getInt("saldo");
 
-                Rekening rekening = new RekeningBuilder(id, nama, noRekening, namaBank)
+                Rekening rekening = new RekeningBuilder(id, nama, noRekening, namaBank, saldo)
                         .build();
 
                 arrRekening.add(rekening);
             }
-            con.close();
             return arrRekening;
         } catch (Exception e) {
             Logger lgr = Logger.getLogger(Version.class.getName());
@@ -47,12 +55,17 @@ public class RekeningService {
             throw e;
         }
     }
-    private static List<Rekening> getRekeningByNoRekening(RekeningRequest rekeningRequest) throws Exception{
-        String nomorTekait = rekeningRequest.getNoRekening();
 
-        String query = "SELECT * FROM nasabah WHERE no_rekening = " + rekeningRequest.getNoRekening();
+    private static List<Rekening> getRekeningByNoRekening(RekeningRequest rekeningRequest) throws Exception{
+        String noRekening = rekeningRequest.getNoRekening();
+
+        String query = "SELECT * FROM nasabah WHERE no_rekening = " + noRekening;
         try{
-            return executeQuery(query);
+            con = DriverManager.getConnection(url, user, password);
+            ResultSet rs = executeQuery(query);
+            List<Rekening> arrRekening = getListRekeningFromResultSet(rs);
+            con.close();
+            return arrRekening;
         } catch (Exception e){
             Logger lgr = Logger.getLogger(Version.class.getName());
             lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -60,7 +73,8 @@ public class RekeningService {
         }
     }
 
-    public static String isExistNomorRekening(RekeningRequest rekeningRequest){
+
+    public static String isExistNomorRekening(RekeningRequest rekeningRequest) {
         try{
             List<Rekening> arrRekening = getRekeningByNoRekening(rekeningRequest);
             boolean exist = !arrRekening.isEmpty();
@@ -71,6 +85,19 @@ public class RekeningService {
             }
         } catch (Exception e){
             return "Error: " + e.getMessage();
+        }
+    }
+    public static Rekening getRekeningDetail(RekeningRequest rekeningRequest){
+        try{
+            List<Rekening> arrRekening = getRekeningByNoRekening(rekeningRequest);
+            boolean exist = !arrRekening.isEmpty();
+            if(exist){
+                return arrRekening.get(0);
+            } else{
+                return new Rekening();
+            }
+        } catch (Exception e){
+            return new Rekening();
         }
     }
 }
