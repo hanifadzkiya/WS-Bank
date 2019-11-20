@@ -19,9 +19,9 @@ import java.util.logging.Logger;
 
 public class TransaksiService {
     private static List<Transaksi> executeQuery(String query) throws Exception{
-        String url = "jdbc:mysql://localhost:3306/wsbank";
-        String user = "root";
-        String password = "1256";
+        String url = "jdbc:mysql://database-1.cxqar33fjxpj.ap-southeast-1.rds.amazonaws.com:3306/wsbank";
+        String user = "engimabp";
+        String password = "Bankpro234";
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();

@@ -16,9 +16,10 @@ import java.util.logging.Logger;
 
 public class RekeningService {
     private static Connection con;
-    private static String url = "jdbc:mysql://localhost:3306/wsbank";
-    private static String user = "root";
-    private static String password = "1256";
+    private static String url = "jdbc:mysql://database-1.cxqar33fjxpj.ap-southeast-1.rds.amazonaws.com:3306/wsbank";
+    private static String user = "engimabp";
+    private static String password = "Bankpro234";
+
     private static ResultSet executeQuery(String query) throws Exception{
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
