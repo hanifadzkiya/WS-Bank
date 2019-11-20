@@ -5,12 +5,14 @@ public class RekeningBuilder {
     private String nama;
     private String noRekening;
     private String namaBank;
+    private int saldo;
 
-    public RekeningBuilder(int id, String nama, String noRekening, String namaBank) {
+    public RekeningBuilder(int id, String nama, String noRekening, String namaBank,int saldo) {
         this.id = id;
         this.nama = nama;
         this.noRekening = noRekening;
         this.namaBank = namaBank;
+        this.saldo = saldo;
     }
 
     public RekeningBuilder setId(int id) {
@@ -33,6 +35,11 @@ public class RekeningBuilder {
         return this;
     }
 
+    public RekeningBuilder setSaldo(int saldo) {
+        this.saldo = saldo;
+        return this;
+    }
+
     public int getId() {
         return id;
     }
@@ -48,6 +55,8 @@ public class RekeningBuilder {
     public String getNamaBank() {
         return namaBank;
     }
+
+    public int getSaldo() { return saldo; }
 
     public Rekening build(){
         return new Rekening(this);

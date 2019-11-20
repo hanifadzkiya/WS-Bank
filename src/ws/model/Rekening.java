@@ -5,12 +5,14 @@ public class Rekening {
     private String nama;
     private String noRekening;
     private String namaBank;
+    private int saldo;
 
     public Rekening(RekeningBuilder rekeningBuilder){
         this.id = rekeningBuilder.getId();
         this.nama = rekeningBuilder.getNama();
         this.noRekening = rekeningBuilder.getNoRekening();
         this.namaBank = rekeningBuilder.getNamaBank();
+        this.saldo = rekeningBuilder.getSaldo();
     }
 
     public Rekening(){
@@ -44,6 +46,10 @@ public class Rekening {
     public String getNamaBank() {
         return namaBank;
     }
+
+    public int getSaldo() { return saldo; }
+
+    public void setSaldo(int saldo) {this.saldo = saldo;}
 
     public void setNamaBank(String namaBank) {
         this.namaBank = namaBank;

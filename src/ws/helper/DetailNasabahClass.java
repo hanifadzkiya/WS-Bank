@@ -7,13 +7,11 @@ import java.util.List;
 
 public class DetailNasabahClass {
     public Rekening rekening;
-    public int saldo;
     public List<Transaksi> listTransaksi;
 
-    public DetailNasabahClass(Rekening rekening, int saldo, List<Transaksi> listTransaksi) {
+    public DetailNasabahClass(Rekening rekening, List<Transaksi> listTransaksi) {
         this.rekening = rekening;
         this.listTransaksi = listTransaksi;
-        this.saldo = saldo;
     }
 
     public Rekening getRekening() {
@@ -24,7 +22,4 @@ public class DetailNasabahClass {
         return listTransaksi;
     }
 
-    public int getSaldo() {
-        return saldo;
-    }
 }

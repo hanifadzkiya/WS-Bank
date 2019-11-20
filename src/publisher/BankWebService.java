@@ -22,22 +22,12 @@ import java.util.logging.Logger;
 @WebService()
 public class BankWebService {
     @WebMethod
-    public DetailNasabahClass getRekeningDetail(String idNasabah) {
-        NasabahRequest nasabahRequest = new NasabahRequestBuilder(idNasabah)
+    public DetailNasabahClass getRekeningDetail(String noRekening) {
+        RekeningRequest rekeningRequest = new RekeningRequestBuilder(noRekening)
                 .build();
-        TransaksiRequest transaksiRequest = new TransaksiRequestBuilder(idNasabah)
-                .build();
-        Rekening resultDetailRekening = RekeningService.getRekeningDetailByIdNasabah(nasabahRequest);
-        List<Transaksi> resultListTransaksi = TransaksiService.getAllNasabahTransaksi(transaksiRequest);
-        int saldo;
-        try{
-            saldo = RekeningService.getSaldoByIdNasabah(nasabahRequest);
-        } catch (Exception e){
-            Logger lgr = Logger.getLogger(Version.class.getName());
-            lgr.log(Level.SEVERE, e.getMessage(), e);
-            throw e;
-        }
-        DetailNasabahClass result = new DetailNasabahClass(resultDetailRekening,saldo,resultListTransaksi);
+        Rekening resultDetailRekening = RekeningService.getRekeningDetail(rekeningRequest);
+        List<Transaksi> resultListTransaksi = TransaksiService.getAllNasabahTransaksi(rekeningRequest);
+        DetailNasabahClass result = new DetailNasabahClass(resultDetailRekening,resultListTransaksi);
         return result;
     }
 
