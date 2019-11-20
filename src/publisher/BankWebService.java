@@ -1,22 +1,39 @@
 package publisher;
 
+import jdk.nashorn.internal.runtime.Version;
+import ws.helper.DetailNasabahClass;
 import ws.model.Rekening;
+import ws.model.Transaksi;
 import ws.service.RekeningService;
-import ws.util.RekeningRequest;
-
-import ws.util.RekeningRequestBuilder;
+import ws.service.TransaksiService;
+import ws.util.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebService()
 public class BankWebService {
     @WebMethod
-    public Rekening getRekeningDetail(String nomorRekening) {
-        RekeningRequest rekeningRequest = new RekeningRequestBuilder(nomorRekening)
+    public DetailNasabahClass getRekeningDetail(String idNasabah) {
+        NasabahRequest nasabahRequest = new NasabahRequestBuilder(idNasabah)
                 .build();
-        Rekening result = RekeningService.getRekeningDetail(rekeningRequest);
+        TransaksiRequest transaksiRequest = new TransaksiRequestBuilder(idNasabah)
+                .build();
+        Rekening resultDetailRekening = RekeningService.getRekeningDetailByIdNasabah(nasabahRequest);
+        List<Transaksi> resultListTransaksi = TransaksiService.getAllNasabahTransaksi(transaksiRequest);
+        int saldo;
+        try{
+            saldo = RekeningService.getSaldoByIdNasabah(nasabahRequest);
+        } catch (Exception e){
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+            throw e;
+        }
+        DetailNasabahClass result = new DetailNasabahClass(resultDetailRekening,saldo,resultListTransaksi);
         return result;
     }
 
