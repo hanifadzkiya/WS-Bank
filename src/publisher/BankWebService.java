@@ -1,5 +1,6 @@
 package publisher;
 
+
 import jdk.nashorn.internal.runtime.Version;
 import ws.helper.DetailNasabahClass;
 import ws.model.Rekening;
@@ -7,6 +8,9 @@ import ws.model.Transaksi;
 import ws.service.RekeningService;
 import ws.service.TransaksiService;
 import ws.util.*;
+import ws.service.CreditTransactionService;
+import ws.util.TransactionRequest;
+import ws.util.TransactionRequestBuilder;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -24,6 +28,17 @@ public class BankWebService {
         Rekening resultDetailRekening = RekeningService.getRekeningDetail(rekeningRequest);
         List<Transaksi> resultListTransaksi = TransaksiService.getAllNasabahTransaksi(rekeningRequest);
         DetailNasabahClass result = new DetailNasabahClass(resultDetailRekening,resultListTransaksi);
+        return result;
+    }
+
+    public String isCreditTransactionExist(String nomorTerkait, Double jumlah, String startTime, String endTime) {
+        TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
+                .setStartTime(startTime)
+                .setEndTime(endTime)
+                .build();
+
+        String result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
+        System.out.println(result);
         return result;
     }
 
