@@ -56,7 +56,7 @@ public class TransferService{
             Connection con = DriverManager.getConnection(url, user, password);
 
             PreparedStatement ps = con.prepareStatement
-                    ("select * from nasabah where no_rekening = "+ nomorPengirim +" and saldo > "+ nominal+";");
+                    ("select * from nasabah where no_rekening = "+ nomorPengirim +" and saldo >= "+ nominal+";");
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) {
                 System.out.println("Saldo kurang");
@@ -117,17 +117,17 @@ public class TransferService{
                 ResultSet rs3 = ps.executeQuery();
                 rs3.next();
                 int id2 = rs3.getInt("id");
-
-                ps = con.prepareStatement
-                        ("insert into transaksi (id_nasabah, jenis, jumlah, nomor_terkait, waktu_transaksi) " +
-                                "values ("+id+", 'kredit', "+nominal+", "+nomorPenerima+", now());");
-                ps.executeUpdate();
-
-                ps = con.prepareStatement
-                        ("insert into transaksi (id_nasabah, jenis, jumlah, nomor_terkait, waktu_transaksi) " +
-                                "values ("+id2+", 'debit', "+nominal+", "+nomorPengirim+", now());");
-                ps.executeUpdate();
             }
+
+            ps = con.prepareStatement
+                    ("insert into transaksi (no_rekening_1, jenis, jumlah, no_rekening_2, waktu_transaksi) " +
+                            "values ('"+ nomorPengirim +"', 'debit', "+nominal+", "+nomorPenerima+", now());");
+            ps.executeUpdate();
+
+            ps = con.prepareStatement
+                    ("insert into transaksi (no_rekening_1, jenis, jumlah, no_rekening_2, waktu_transaksi) " +
+                            "values ('"+nomorPenerima+"', 'kredit', "+nominal+", "+nomorPengirim+", now());");
+            ps.executeUpdate();
         } catch (Exception e){
             Logger lgr = Logger.getLogger(Version.class.getName());
             lgr.log(Level.SEVERE, e.getMessage(), e);
