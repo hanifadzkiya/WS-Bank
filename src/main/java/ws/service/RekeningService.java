@@ -73,6 +73,20 @@ public class RekeningService {
         }
     }
 
+
+    public static boolean isExistNomorRekening(RekeningRequest rekeningRequest) {
+        try{
+            List<Rekening> arrRekening = getRekeningByNoRekening(rekeningRequest);
+            boolean exist = !arrRekening.isEmpty();
+            if(exist){
+                return true;
+            } else{
+                return false;
+            }
+        } catch (Exception e){
+            return false;
+        }
+    }
     public static Rekening getRekeningDetail(RekeningRequest rekeningRequest){
         try{
             List<Rekening> arrRekening = getRekeningByNoRekening(rekeningRequest);

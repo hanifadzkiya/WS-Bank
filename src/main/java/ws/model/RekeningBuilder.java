@@ -56,6 +56,7 @@ public class RekeningBuilder {
         return namaBank;
     }
 
+
     public int getSaldo() { return saldo; }
 
     public Rekening build(){

@@ -1,13 +1,13 @@
 package publisher;
 
+import ws.service.RekeningService;
+import ws.util.RekeningRequest;
 
-import jdk.nashorn.internal.runtime.Version;
+import ws.util.RekeningRequestBuilder;
 import ws.helper.DetailNasabahClass;
 import ws.model.Rekening;
 import ws.model.Transaksi;
-import ws.service.RekeningService;
 import ws.service.TransaksiService;
-import ws.util.*;
 import ws.service.CreditTransactionService;
 import ws.util.TransactionRequest;
 import ws.util.TransactionRequestBuilder;
@@ -16,11 +16,18 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebService()
 public class BankWebService {
+    @WebMethod
+    public boolean isRekeningExist(String nomorRekening) {
+        RekeningRequest rekeningRequest = new RekeningRequestBuilder(nomorRekening)
+                .build();
+
+        boolean result = RekeningService.isExistNomorRekening(rekeningRequest);
+        return result;
+    }
+
     @WebMethod
     public DetailNasabahClass getRekeningDetail(String noRekening) {
         RekeningRequest rekeningRequest = new RekeningRequestBuilder(noRekening)
