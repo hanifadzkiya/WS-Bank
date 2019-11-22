@@ -11,10 +11,8 @@ import java.util.logging.Logger;
 import jdk.nashorn.internal.runtime.Version;
 import ws.model.Rekening;
 import ws.model.Transaksi;
-import ws.model.Transaksi;
 import ws.model.TransaksiBuilder;
 import ws.util.RekeningRequest;
-import ws.util.TransaksiRequest;
 
 public class TransaksiService {
   /**
@@ -67,10 +65,12 @@ public class TransaksiService {
    * @throws Exception exception.
    */
   private static List<Transaksi> getTransaksiByNoRekening(
-      RekeningRequest rekeningRequest) throws Exception {
+      RekeningRequest rekeningRequest,int idNasabah) throws Exception {
     String noRekening = rekeningRequest.getNoRekening();
 
-    String query = "SELECT * FROM transaksi WHERE no_rekening_1 = " + noRekening;
+    String query = "SELECT * from transaksi WHERE no_rekening_1 = "
+        + noRekening + " OR (no_rekening_1 in (SELECT no_akun_virtual "
+        + "FROM akun_virtual WHERE id_rekening= " + idNasabah + "))";
     try {
       return executeQuery(query);
     } catch (Exception e) {
@@ -87,7 +87,9 @@ public class TransaksiService {
    */
   public static List<Transaksi> getAllNasabahTransaksi(RekeningRequest rekeningRequest) {
     try {
-      List<Transaksi> arrTransaksi = getTransaksiByNoRekening(rekeningRequest);
+      Rekening resultDetailRekening = RekeningService.getRekeningDetail(rekeningRequest);
+      int idNasabah = resultDetailRekening.getId();
+      List<Transaksi> arrTransaksi = getTransaksiByNoRekening(rekeningRequest, idNasabah);
       return arrTransaksi;
     } catch (Exception e) {
       return null;

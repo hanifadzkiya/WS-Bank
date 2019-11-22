@@ -4,17 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jdk.nashorn.internal.runtime.Version;
 
 public class NewVirtualAccountService {
-
   /**
-   * CreateNew.
-   * @param nomorRekening nomorRekening.
+   * Create NEW.
+   * @param nomorRekening nomor Rekening.
    * @return String.
-   * @throws Exception exception.
+   * @throws Exception Exception.
    */
   public static String createNew(String nomorRekening) throws Exception {
     String url =
@@ -26,7 +27,8 @@ public class NewVirtualAccountService {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con = DriverManager.getConnection(url, user, password);
 
-      long cons = 1999072746;
+      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+      long cons = timestamp.getTime();
       long newVirtualAccountNumber = Long.parseLong(nomorRekening) + cons;
 
       PreparedStatement ps = con.prepareStatement(
@@ -37,7 +39,7 @@ public class NewVirtualAccountService {
       int idRekening = rs.getInt("id");
 
       ps = con.prepareStatement(
-          "insert into akun_virtual (no_akun_virtual, id_rekening) "
+          "insert into akun_virtual (no_akun_virtual, idRekening) "
               + "values (" + newVirtualAccountNumber + "," + idRekening + ");");
       ps.executeUpdate();
 

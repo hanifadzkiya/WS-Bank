@@ -92,12 +92,12 @@ public class TransferService {
   }
 
   /**
-   * Memvalidasi Transfer.
+   * Validasi.
    * @param nomorPengirim nomor Pengirim.
    * @param nomorPenerima nomor Penerima.
    * @param saldo saldo.
-   * @return boolean.
-   * @throws Exception exception.
+   * @return Boolean.
+   * @throws Exception Exception.
    */
   public static boolean validate(
       String nomorPengirim, String nomorPenerima, long saldo) throws Exception {
