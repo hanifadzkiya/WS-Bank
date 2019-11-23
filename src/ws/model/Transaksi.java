@@ -1,42 +1,71 @@
 package ws.model;
 
 public class Transaksi {
-    public int id;
-    public String noRekening_1;
-    public String jenis;
-    public int jumlah;
-    public String noRekening_2;
-    public String waktuTransaksi;
+  public int id;
+  public String noRekening1;
+  public String jenis;
+  public int jumlah;
+  public String noRekening2;
+  public String waktuTransaksi;
 
-    public Transaksi(TransaksiBuilder transaksiBuilder) {
-        this.id = transaksiBuilder.getId();
-        this.noRekening_1 = transaksiBuilder.getNoRekening_1();
-        this.jenis = transaksiBuilder.getJenis();
-        this.jumlah = transaksiBuilder.getJumlah();
-        this.noRekening_2 = transaksiBuilder.getNoRekening_2();
-        this.waktuTransaksi = transaksiBuilder.getWaktuTransaksi();
-    }
-    public int getId() {
-        return id;
-    }
+  /**
+   * Constrctor.
+   * @param transaksiBuilder TransaksiBuilder.
+   */
+  public Transaksi(TransaksiBuilder transaksiBuilder) {
+    this.id = transaksiBuilder.getId();
+    this.noRekening1 = transaksiBuilder.getNoRekening1();
+    this.jenis = transaksiBuilder.getJenis();
+    this.jumlah = transaksiBuilder.getJumlah();
+    this.noRekening2 = transaksiBuilder.getNoRekening2();
+    this.waktuTransaksi = transaksiBuilder.getWaktuTransaksi();
+  }
 
-    public String getNoRekening_1() {
-        return noRekening_1;
-    }
+  /**
+   * GetId.
+   * @return id.
+   */
+  public int getId() {
+    return id;
+  }
 
-    public String getJenis() {
-        return jenis;
-    }
+  /**
+   * GetNomorRekening1.
+   * @return noRekening1.
+   */
+  public String getNoRekening1() {
+    return noRekening1;
+  }
 
-    public int getJumlah() {
-        return jumlah;
-    }
+  /**
+   * getJenis.
+   * @return jenis.
+   */
+  public String getJenis() {
+    return jenis;
+  }
 
-    public String getNoRekening_2() {
-        return noRekening_2;
-    }
+  /**
+   * getJumlah.
+   * @return jumlah.
+   */
+  public int getJumlah() {
+    return jumlah;
+  }
 
-    public String getWaktuTransaksi() {
-        return waktuTransaksi;
-    }
+  /**
+   * GetNomorRekening2.
+   * @return noRekening2.
+   */
+  public String getNoRekening2() {
+    return noRekening2;
+  }
+
+  /**
+   * getWaktuTransaksi.
+   * @return waktuTransaksi.
+   */
+  public String getWaktuTransaksi() {
+    return waktuTransaksi;
+  }
 }

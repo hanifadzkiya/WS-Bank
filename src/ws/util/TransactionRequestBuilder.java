@@ -1,43 +1,78 @@
 package ws.util;
 
 public class TransactionRequestBuilder {
-    private String nomorTerkait;
-    private Double jumlah;
-    private String startTime;
-    private String endTime;
+  private String nomorTerkait;
+  private Double jumlah;
+  private String startTime;
+  private String endTime;
 
-    public TransactionRequestBuilder(String nomorTerkait, Double jumlah){
-        this.nomorTerkait = nomorTerkait;
-        this.jumlah = jumlah;
-    }
+  /**
+   * Constructor.
+   * @param nomorTerkait nomor terkait.
+   * @param jumlah jumlah.
+   */
+  public TransactionRequestBuilder(String nomorTerkait, Double jumlah) {
+    this.nomorTerkait = nomorTerkait;
+    this.jumlah = jumlah;
+  }
 
-    public TransactionRequestBuilder setStartTime(String startTime){
-        this.startTime = startTime;
-        return this;
-    }
+  /**
+   * Set Start Time.
+   * @param startTime start Time.
+   * @return this.
+   */
+  public TransactionRequestBuilder setStartTime(String startTime) {
+    this.startTime = startTime;
+    return this;
+  }
 
-    public TransactionRequestBuilder setEndTime(String endTime){
-        this.endTime = endTime;
-        return this;
-    }
+  /**
+   * set End Time.
+   * @param endTime end Time.
+   * @return this.
+   */
+  public TransactionRequestBuilder setEndTime(String endTime) {
+    this.endTime = endTime;
+    return this;
+  }
 
-    public TransactionRequest build(){
-        return new TransactionRequest(this);
-    }
+  /**
+   * Build.
+   * @return Transaction Request.
+   */
+  public TransactionRequest build() {
+    return new TransactionRequest(this);
+  }
 
-    public String getNomorTerkait() {
-        return nomorTerkait;
-    }
+  /**
+   * Get Nomot Terkait.
+   * @return nomor Terkait.
+   */
+  public String getNomorTerkait() {
+    return nomorTerkait;
+  }
 
-    public Double getJumlah() {
-        return jumlah;
-    }
+  /**
+   * Get Jumlah.
+   * @return jumlah.
+   */
+  public Double getJumlah() {
+    return jumlah;
+  }
 
-    public String getStartTime() {
-        return startTime;
-    }
+  /**
+   * Get Start Time.
+   * @return start Time.
+   */
+  public String getStartTime() {
+    return startTime;
+  }
 
-    public String getEndTime() {
-        return endTime;
-    }
+  /**
+   * Get end Time.
+   * @return End Time.
+   */
+  public String getEndTime() {
+    return endTime;
+  }
 }

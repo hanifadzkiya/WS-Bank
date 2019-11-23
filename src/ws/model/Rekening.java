@@ -1,57 +1,108 @@
 package ws.model;
 
 public class Rekening {
-    private int id;
-    private String nama;
-    private String noRekening;
-    private String namaBank;
-    private int saldo;
+  private int id;
+  private String nama;
+  private String noRekening;
+  private String namaBank;
+  private int saldo;
 
-    public Rekening(RekeningBuilder rekeningBuilder){
-        this.id = rekeningBuilder.getId();
-        this.nama = rekeningBuilder.getNama();
-        this.noRekening = rekeningBuilder.getNoRekening();
-        this.namaBank = rekeningBuilder.getNamaBank();
-        this.saldo = rekeningBuilder.getSaldo();
-    }
+  /**
+   * Constructor.
+   * @param rekeningBuilder rekeningBuilder.
+   */
+  public Rekening(RekeningBuilder rekeningBuilder) {
+    this.id = rekeningBuilder.getId();
+    this.nama = rekeningBuilder.getNama();
+    this.noRekening = rekeningBuilder.getNoRekening();
+    this.namaBank = rekeningBuilder.getNamaBank();
+    this.saldo = rekeningBuilder.getSaldo();
+  }
 
-    public Rekening(){
+  /**
+   * Constructor.
+   */
+  public Rekening() {
 
-    }
+  }
 
-    public int getId() {
-        return id;
-    }
+  /**
+   * Get ID.
+   * @return id.
+   */
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  /**
+   * Set Id.
+   * @param id Id.
+   */
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getNama() {
-        return nama;
-    }
+  /**
+   * Get Nama.
+   * @return nama.
+   */
+  public String getNama() {
+    return nama;
+  }
 
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
+  /**
+   * Set Nama.
+   * @param nama nama.
+   */
+  public void setNama(String nama) {
+    this.nama = nama;
+  }
 
-    public String getNoRekening() {
-        return noRekening;
-    }
+  /**
+   * Get Nomor Rekening.
+   * @return STring.
+   */
+  public String getNoRekening() {
+    return noRekening;
+  }
 
-    public void setNoRekening(String noRekening) {
-        this.noRekening = noRekening;
-    }
+  /**
+   * Set Nomor Rekening.
+   * @param noRekening NoRekening.
+   */
+  public void setNoRekening(String noRekening) {
+    this.noRekening = noRekening;
+  }
 
-    public String getNamaBank() {
-        return namaBank;
-    }
+  /**
+   * GetNamaBank.
+   * @return namaBank.
+   */
+  public String getNamaBank() {
+    return namaBank;
+  }
 
-    public int getSaldo() { return saldo; }
+  /**
+   * GetSaldo.
+   * @return saldo.
+   */
+  public int getSaldo() {
+    return saldo;
+  }
 
-    public void setSaldo(int saldo) {this.saldo = saldo;}
+  /**
+   * SetSaldo.
+   * @param saldo saldo.
+   */
+  public void setSaldo(int saldo) {
+    this.saldo = saldo;
+  }
 
-    public void setNamaBank(String namaBank) {
-        this.namaBank = namaBank;
-    }
+  /**
+   * Set Nama Bank.
+   * @param namaBank namaBank.
+   */
+  public void setNamaBank(String namaBank) {
+    this.namaBank = namaBank;
+  }
 }
