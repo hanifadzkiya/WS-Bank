@@ -16,8 +16,9 @@ cp -r META-INF web/WEB-INF/classes
 cp -r ../example web/WEB-INF/classes
 cp -r ../META-INF web/WEB-INF/classes
 
-cd web
+cd /home/ubuntu/ws-bank/web/WEB-INF/classes
 javac $(find ./* | grep .java)
+cd /home/ubuntu/ws-bank/web
 jar -cvf ws-bank_war.war *
 
 # Deploy war to glassfish
