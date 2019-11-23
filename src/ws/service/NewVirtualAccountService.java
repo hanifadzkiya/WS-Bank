@@ -43,7 +43,7 @@ public class NewVirtualAccountService {
               + "values (" + newVirtualAccountNumber + "," + idRekening + ");");
       ps.executeUpdate();
 
-      String result = "Berhasil, dengan nomor akun virtual : " + newVirtualAccountNumber;
+      String result = newVirtualAccountNumber;
       return result;
     } catch (Exception e) {
       Logger lgr = Logger.getLogger(Version.class.getName());
