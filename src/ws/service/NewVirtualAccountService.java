@@ -39,7 +39,7 @@ public class NewVirtualAccountService {
       int idRekening = rs.getInt("id");
 
       ps = con.prepareStatement(
-          "insert into akun_virtual (no_akun_virtual, idRekening) "
+          "insert into akun_virtual (no_akun_virtual, id_rekening) "
               + "values (" + newVirtualAccountNumber + "," + idRekening + ");");
       ps.executeUpdate();
 
