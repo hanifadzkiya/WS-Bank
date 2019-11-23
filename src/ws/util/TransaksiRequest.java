@@ -3,13 +3,21 @@ package ws.util;
 import ws.model.Transaksi;
 
 public class TransaksiRequest {
-    private String idNasabah;
+  private String idNasabah;
 
-    public TransaksiRequest(TransaksiRequestBuilder transaksiRequestBuilder){
-        this.idNasabah = transaksiRequestBuilder.getIdNasabah();
-    }
+  /**
+   * Constructor.
+   * @param transaksiRequestBuilder Transaksi Request Builder.
+   */
+  public TransaksiRequest(TransaksiRequestBuilder transaksiRequestBuilder) {
+    this.idNasabah = transaksiRequestBuilder.getIdNasabah();
+  }
 
-    public String getIdNasabah() {
-        return idNasabah;
-    }
+  /**
+   * Get Id Nasabah.
+   * @return id Nasabah.
+   */
+  public String getIdNasabah() {
+    return idNasabah;
+  }
 }

@@ -1,22 +1,39 @@
 package ws.util;
 
 public class NasabahRequestBuilder {
-    public String idNasabah;
+  public String idNasabah;
 
-    public NasabahRequestBuilder(String idNasabah) {
-        this.idNasabah = idNasabah;
-    }
+  /**
+   * Constructor.
+   * @param idNasabah id Nasabah.
+   */
+  public NasabahRequestBuilder(String idNasabah) {
+    this.idNasabah = idNasabah;
+  }
 
-    public NasabahRequestBuilder setIdNasabah(String idNasabah) {
-        this.idNasabah = idNasabah;
-        return this;
-    }
+  /**
+   * Set Id Nasabah.
+   * @param idNasabah idNasabah.
+   * @return id Nasabah.
+   */
+  public NasabahRequestBuilder setIdNasabah(String idNasabah) {
+    this.idNasabah = idNasabah;
+    return this;
+  }
 
-    public String getIdNasabah() {
-        return idNasabah;
-    }
+  /**
+   * Get Id Nasabah.
+   * @return id Nasabah.
+   */
+  public String getIdNasabah() {
+    return idNasabah;
+  }
 
-    public NasabahRequest build(){
-        return new NasabahRequest(this);
-    }
+  /**
+   * Build.
+   * @return Nasabah Request.
+   */
+  public NasabahRequest build() {
+    return new NasabahRequest(this);
+  }
 }

@@ -1,63 +1,116 @@
 package ws.model;
 
 public class TransactionBuilder {
-    private int id;
-    private String idNasabah;
-    private String jenis;
-    private Double jumlah;
-    private String nomorTerkait;
-    private String waktuTransaksi;
+  private int id;
+  private String idNasabah;
+  private String jenis;
+  private Double jumlah;
+  private String nomorTerkait;
+  private String waktuTransaksi;
 
-    public TransactionBuilder(int id, String idNasabah){
-        this.id = id;
-        this.idNasabah = idNasabah;
-    }
+  /**
+   * Constructor.
+   * @param id id.
+   * @param idNasabah idNasabah.
+   */
+  public TransactionBuilder(int id, String idNasabah) {
+    this.id = id;
+    this.idNasabah = idNasabah;
+  }
 
-    public TransactionBuilder setJenis(String jenis){
-        this.jenis = jenis;
-        return this;
-    }
+  /**
+   * Constructor.
+   * @param jenis jenis.
+   * @return this.
+   */
+  public TransactionBuilder setJenis(String jenis) {
+    this.jenis = jenis;
+    return this;
+  }
 
-    public TransactionBuilder setJumlah(Double jumlah){
-        this.jumlah = jumlah;
-        return this;
-    }
+  /**
+   * SetJumlah.
+   * @param jumlah jumlah.
+   * @return this.
+   */
+  public TransactionBuilder setJumlah(Double jumlah) {
+    this.jumlah = jumlah;
+    return this;
+  }
 
-    public TransactionBuilder setNomorTerkait(String startTime){
-        this.nomorTerkait = startTime;
-        return this;
-    }
+  /**
+   * setNomorTerkait.
+   * @param startTime startTime.
+   * @return this.
+   */
+  public TransactionBuilder setNomorTerkait(String startTime) {
+    this.nomorTerkait = startTime;
+    return this;
+  }
 
-    public TransactionBuilder setWaktuTransaksi(String endTime){
-        this.waktuTransaksi = endTime;
-        return this;
-    }
+  /**
+   * setWaktuTransaksi.
+   * @param endTime endTime.
+   * @return this.
+   */
+  public TransactionBuilder setWaktuTransaksi(String endTime) {
+    this.waktuTransaksi = endTime;
+    return this;
+  }
 
-    public Transaction build(){
-        return new Transaction(this);
-    }
+  /**
+   * build.
+   * @return Transaction.
+   */
+  public Transaction build() {
+    return new Transaction(this);
+  }
 
-    public int getId() {
-        return id;
-    }
+  /**
+   * Get ID.
+   * @return id.
+   */
+  public int getId() {
+    return id;
+  }
 
-    public String getIdNasabah() {
-        return idNasabah;
-    }
+  /**
+   * GetIdNasabah.
+   * @return idNasabah.
+   */
+  public String getIdNasabah() {
+    return idNasabah;
+  }
 
-    public String getJenis() {
-        return jenis;
-    }
+  /**
+   * GetJenis.
+   * @return jenis.
+   */
+  public String getJenis() {
+    return jenis;
+  }
 
-    public Double getJumlah() {
-        return jumlah;
-    }
+  /**
+   * GetJumlah.
+   * @return jumlah.
+   */
+  public Double getJumlah() {
+    return jumlah;
+  }
 
-    public String getNomorTerkait() {
-        return nomorTerkait;
-    }
+  /**
+   * Get Nomor Terkait.
+   * @return Nomor Terkait.
+   */
+  public String getNomorTerkait() {
+    return nomorTerkait;
+  }
 
-    public String getWaktuTransaksi() {
-        return waktuTransaksi;
-    }
+  /**
+   * Get Waktu Transaksi.
+   * @return Waktu Transaksi.
+   */
+  public String getWaktuTransaksi() {
+    return waktuTransaksi;
+  }
 }
