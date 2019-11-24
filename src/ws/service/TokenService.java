@@ -59,9 +59,9 @@ public class TokenService {
       } else {
         String generatedString = generateRandomString();
         query = "DELETE  FROM banktoken WHERE token = '" + generatedString + "';";
-        rs = st.executeQuery(query);
+        st.execute(query);
         query = "INSERT INTO banktoken(token) VALUES '" + generatedString + "';";
-        rs = st.executeQuery(query);
+        st.execute(query);
         return generatedString;
       }
     } catch (Exception e) {
