@@ -62,7 +62,7 @@ public class TokenService {
         st.execute(query);
         query = "INSERT INTO banktoken(token) VALUES ('" + generatedString + "');";
         st.execute(query);
-        return generatedString;
+        return "abcdef";
       }
     } catch (Exception e) {
       return e.getMessage();
