@@ -81,10 +81,10 @@ public class CreditTransactionService {
     String startTime = transactionRequest.getStartTime();
     String endTime = transactionRequest.getEndTime();
 
-    String query = "SELECT * FROM transaksi WHERE jenis = 'kredit' AND no_rekening_2 = '";
+    String query = "SELECT * FROM transaksi WHERE jenis = 'kredit' AND no_rekening_1 = '";
     query = query + nomorTekait + "' AND jumlah = "
-        + jumlah.toString() + "AND waktu_transaksi >= '" + startTime + "'";
-    query = query + "AND waktu_transaksi <= '" + endTime + "';";
+        + jumlah.toString() + " AND waktu_transaksi >= '" + startTime + "'";
+    query = query + " AND waktu_transaksi <= '" + endTime + "';";
     try {
       return executeQuery(query, CREDIT_TRANSACTION_TYPE);
     } catch (Exception e) {
@@ -110,7 +110,7 @@ public class CreditTransactionService {
         return false;
       }
     } catch (Exception e) {
-      return false;
+      return null;
     }
   }
 }
