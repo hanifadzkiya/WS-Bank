@@ -14,6 +14,7 @@ import ws.service.TransaksiService;
 import ws.service.TransferService;
 import ws.util.RekeningRequest;
 import ws.util.RekeningRequestBuilder;
+import ws.util.TokenValidator;
 import ws.util.TransactionRequest;
 import ws.util.TransactionRequestBuilder;
 
@@ -21,14 +22,29 @@ import ws.util.TransactionRequestBuilder;
 public class BankWebService {
   /**
    * Membuat Virtual Akun Baru.
-   * @param nomorRekening Nomor Rekenig.
+   * @param token token request.
+   * @return result
+   */
+  private boolean validateRequestToken(String token) {
+    boolean result = TokenValidator.validateToken(token);
+    return result;
+  }
+
+  /**
+   * Membuat Virtual Akun Baru.
+   * @param nomorRekening Nomor Rekening.
+   * @param token Token
    * @return result
    * @throws Exception Exception.
    */
   @WebMethod
-  public String newVirtualAccount(String nomorRekening) throws Exception {
-    String result = NewVirtualAccountService.createNew(nomorRekening);
-    return result;
+  public String newVirtualAccount(String nomorRekening, String token) throws Exception {
+    if (validateRequestToken(token)) {
+      String result = NewVirtualAccountService.createNew(nomorRekening);
+      return result;
+    } else {
+      return new String("Error. Forbidden request");
+    }
   }
 
   /**
@@ -36,52 +52,67 @@ public class BankWebService {
    * @param nomorPengirim Nomor Pengirim.
    * @param nomorPenerima Nomor Penerima.
    * @param nominal Nominal.
+   * @param token Token
    * @return result
    * @throws Exception Exception.
    */
   @WebMethod
-  public String transfer(String nomorPengirim, String nomorPenerima, long nominal)
+  public String transfer(String nomorPengirim, String nomorPenerima, long nominal, String token)
       throws Exception {
-    boolean nomorValid = TransferService.validate(nomorPengirim, nomorPenerima, nominal);
-    if (nomorValid) {
-      TransferService.transfer(nomorPengirim, nomorPenerima, nominal);
-      String result = "Transfer berhasil";
-      System.out.println(result);
-      return result;
+    if (validateRequestToken(token)) {
+      boolean nomorValid = TransferService.validate(nomorPengirim, nomorPenerima, nominal);
+      if (nomorValid) {
+        TransferService.transfer(nomorPengirim, nomorPenerima, nominal);
+        String result = "Transfer berhasil";
+        System.out.println(result);
+        return result;
+      } else {
+        String result = "Transfer gagal";
+        System.out.println(result);
+        return result;
+      }
     } else {
-      String result = "Transfer gagal";
-      System.out.println(result);
-      return result;
+      return new String("Error. Forbidden request");
     }
   }
 
   /**
    * Mengecek Ketersediaan Rekening.
    * @param nomorRekening Nomor Rekening.
+   * @param token Token
    * @return boolean
    */
   @WebMethod
-  public boolean isRekeningExist(String nomorRekening) {
-    RekeningRequest rekeningRequest = new RekeningRequestBuilder(nomorRekening)
-        .build();
+  public Boolean isRekeningExist(String nomorRekening, String token) {
+    if (validateRequestToken(token)) {
+      RekeningRequest rekeningRequest = new RekeningRequestBuilder(nomorRekening)
+          .build();
 
-    boolean result = RekeningService.isExistNomorRekening(rekeningRequest);
-    return result;
+      Boolean result = RekeningService.isExistNomorRekening(rekeningRequest);
+      return result;
+    } else {
+      return null;
+    }
   }
 
   /**
    * Mengambil detail rekening.
    * @param noRekening Nomor Rekening.
+   * @param token Token
    * @return DetailNasabahClass
    */
   @WebMethod
-  public DetailNasabahClass getRekeningDetail(String noRekening) {
-    RekeningRequest rekeningRequest = new RekeningRequestBuilder(noRekening)
-        .build();
-    Rekening resultDetailRekening = RekeningService.getRekeningDetail(rekeningRequest);
-    List<Transaksi> resultListTransaksi = TransaksiService.getAllNasabahTransaksi(rekeningRequest);
-    DetailNasabahClass result = new DetailNasabahClass(resultDetailRekening,resultListTransaksi);
-    return result;
+  public DetailNasabahClass getRekeningDetail(String noRekening, String token) {
+    if (validateRequestToken(token)) {
+      RekeningRequest rekRequest = new RekeningRequestBuilder(noRekening)
+          .build();
+      Rekening resultDetailRekening = RekeningService.getRekeningDetail(rekRequest);
+      List<Transaksi> resultListTransaksi = TransaksiService.getAllNasabahTransaksi(rekRequest);
+      DetailNasabahClass result = new DetailNasabahClass(resultDetailRekening,resultListTransaksi);
+      return result;
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -90,19 +121,24 @@ public class BankWebService {
    * @param jumlah Jumlah.
    * @param startTime Start Time.
    * @param endTime End Time.
+   * @param token Token
    * @return Boolean
    */
   @WebMethod
   public Boolean isCreditTransactionExist(
-      String nomorTerkait, Double jumlah, String startTime, String endTime) {
-    TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
-        .setStartTime(startTime)
-        .setEndTime(endTime)
-        .build();
+      String nomorTerkait, Double jumlah, String startTime, String endTime, String token) {
+    if (validateRequestToken(token)) {
+      TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
+          .setStartTime(startTime)
+          .setEndTime(endTime)
+          .build();
 
-    Boolean result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
-    System.out.println(result);
-    return result;
+      Boolean result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
+      System.out.println(result);
+      return result;
+    } else {
+      return null;
+    }
   }
 
   /**
