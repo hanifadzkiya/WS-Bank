@@ -10,23 +10,33 @@ import ws.model.Transaksi;
 import ws.service.CreditTransactionService;
 import ws.service.NewVirtualAccountService;
 import ws.service.RekeningService;
+import ws.service.TokenService;
 import ws.service.TransaksiService;
 import ws.service.TransferService;
 import ws.util.RekeningRequest;
 import ws.util.RekeningRequestBuilder;
-import ws.util.TokenValidator;
 import ws.util.TransactionRequest;
 import ws.util.TransactionRequestBuilder;
 
 @WebService()
 public class BankWebService {
   /**
-   * Membuat Virtual Akun Baru.
+   * Memvalidasi token request.
    * @param token token request.
    * @return result
    */
   private boolean validateRequestToken(String token) {
-    boolean result = TokenValidator.validateToken(token);
+    boolean result = TokenService.validateToken(token);
+    return result;
+  }
+
+  /**
+   * Meminta token yang ada atau token baru.
+   * @return result
+   */
+  @WebMethod
+  public String getRequestToken() {
+    String result = TokenService.getRequestToken();
     return result;
   }
 
