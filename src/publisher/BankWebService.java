@@ -135,7 +135,7 @@ public class BankWebService {
    * @return Boolean
    */
   @WebMethod
-  public Boolean isCreditTransactionExist(
+  public boolean isCreditTransactionExist(
       String nomorTerkait, Double jumlah, String startTime, String endTime, String token) {
     if (validateRequestToken(token)) {
       TransactionRequest transactionRequest = new TransactionRequestBuilder(nomorTerkait, jumlah)
@@ -143,11 +143,11 @@ public class BankWebService {
           .setEndTime(endTime)
           .build();
 
-      Boolean result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
+      boolean result = CreditTransactionService.isExistCreditTransaction(transactionRequest);
       System.out.println(result);
       return result;
     } else {
-      return null;
+      return false;
     }
   }
 
