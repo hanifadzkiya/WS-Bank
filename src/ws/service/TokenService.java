@@ -1,13 +1,15 @@
 package ws.service;
 
-import java.nio.charset.Charset;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Random;
 
 public class TokenService {
+  static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  static SecureRandom rnd = new SecureRandom();
+
   /**
    * validateToken yang diinginkan.
    * @param token String
@@ -62,21 +64,25 @@ public class TokenService {
         st.execute(query);
         query = "INSERT INTO banktoken(token) VALUES ('" + generatedString + "');";
         st.execute(query);
-        return "abcdef";
+        return generatedString;
       }
     } catch (Exception e) {
       return e.getMessage();
     }
   }
 
+
   /**
    * generateRandomString.
    * @return boolean
    */
   private static String generateRandomString() {
-    byte[] array = new byte[10];
-    new Random().nextBytes(array);
-    String generatedString = new String(array, Charset.forName("UTF-8"));
-    return generatedString;
+    int len = 15;
+    int i;
+    StringBuilder sb = new StringBuilder(len);
+    for (i = 0; i < len; i++) {
+      sb.append(AB.charAt(rnd.nextInt(AB.length())));
+    }
+    return sb.toString();
   }
 }
