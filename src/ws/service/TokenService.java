@@ -18,8 +18,7 @@ public class TokenService {
         "jdbc:mysql://database-1.cxqar33fjxpj.ap-southeast-1.rds.amazonaws.com:3306/wsbank";
     String user = "engimabp";
     String password = "Bankpro234";
-    String query = "SELECT * FROM banktoken WHERE token = '" + token;
-    query +=  "' AND (TIME_TO_SEC(TIMEDIFF(NOW(), time_created)) < 3600);";
+    String query = "SELECT * FROM banktoken WHERE token = '" + token + "'";
   
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -47,7 +46,7 @@ public class TokenService {
     String user = "engimabp";
     String password = "Bankpro234";
     String query = "SELECT * FROM banktoken WHERE ";
-    query += " (TIME_TO_SEC(TIMEDIFF(NOW(), time_created)) < 3600);";
+    query += " (TIME_TO_SEC(TIMEDIFF(NOW(), created_at)) < 3600);";
 
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -59,7 +58,7 @@ public class TokenService {
         return rs.getString("token");
       } else {
         String generatedString = generateRandomString();
-        query = "DELETE  FROM banktoken WHERE (TIME_TO_SEC(TIMEDIFF(NOW(), time_created)) >= 3600)";
+        query = "DELETE  FROM banktoken WHERE token = '" + generatedString + "';";
         rs = st.executeQuery(query);
         query = "INSERT INTO banktoken(token) VALUES '" + generatedString + "';";
         rs = st.executeQuery(query);
