@@ -39,11 +39,11 @@ public class NewVirtualAccountService {
       int idRekening = rs.getInt("id");
 
       ps = con.prepareStatement(
-          "insert into akun_virtual (no_akun_virtual, idRekening) "
+          "insert into akun_virtual (no_akun_virtual, id_rekening) "
               + "values (" + newVirtualAccountNumber + "," + idRekening + ");");
       ps.executeUpdate();
 
-      String result = "Berhasil, dengan nomor akun virtual : " + newVirtualAccountNumber;
+      String result = "" + newVirtualAccountNumber;
       return result;
     } catch (Exception e) {
       Logger lgr = Logger.getLogger(Version.class.getName());
