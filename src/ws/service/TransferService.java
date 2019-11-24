@@ -76,7 +76,7 @@ public class TransferService {
 
       PreparedStatement ps = con.prepareStatement(
           "select * from nasabah where "
-              + "no_rekening_1 = " + nomorPengirim + " and saldo >= " + nominal + ";");
+              + "no_rekening = " + nomorPengirim + " and saldo >= " + nominal + ";");
       ResultSet rs = ps.executeQuery();
       if (!rs.next()) {
         System.out.println("Saldo kurang");
