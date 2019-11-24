@@ -1,77 +1,146 @@
 package ws.model;
 
 public class TransaksiBuilder {
-    private int id;
-    private String noRekening_1;
-    private String jenis;
-    private int jumlah;
-    public String noRekening_2;
-    public String waktuTransaksi;
+  private int id;
+  private String noRekening1;
+  private String jenis;
+  private int jumlah;
+  public String noRekening2;
+  public String waktuTransaksi;
 
-    public TransaksiBuilder setId(int id) {
-        this.id = id;
-        return this;
-    }
+  /**
+   * SetId.
+   * @param id id.
+   * @return this.
+   */
+  public TransaksiBuilder setId(int id) {
+    this.id = id;
+    return this;
+  }
 
-    public TransaksiBuilder setNoRekening_1(String noRekening_1) {
-        this.noRekening_1 = noRekening_1;
-        return this;
-    }
+  /**
+   * Constructor.
+   * @param noRekening1 nomorRekening1.
+   * @return this.
+   */
+  public TransaksiBuilder setNoRekening1(String noRekening1) {
+    this.noRekening1 = noRekening1;
+    return this;
+  }
 
-    public TransaksiBuilder setJenis(String jenis) {
-        this.jenis = jenis;
-        return this;
-    }
+  /**
+   * SetJenis.
+   * @param jenis jenis.
+   * @return jenis.
+   */
+  public TransaksiBuilder setJenis(String jenis) {
+    this.jenis = jenis;
+    return this;
+  }
 
-    public TransaksiBuilder setJumlah(int jumlah) {
-        this.jumlah = jumlah;
-        return this;
-    }
+  /**
+   * TransaksiBuilder.
+   * @param jumlah jumlah.
+   * @return jumlah.
+   */
+  public TransaksiBuilder setJumlah(int jumlah) {
+    this.jumlah = jumlah;
+    return this;
+  }
 
-    public TransaksiBuilder setNoRekening_2(String noRekening_2) {
-        this.noRekening_2 = noRekening_2;
-        return this;
-    }
+  /**
+   * SetNomorRekening2.
+   * @param noRekening2 noRekening2.
+   * @return this.
+   */
+  public TransaksiBuilder setNoRekening2(String noRekening2) {
+    this.noRekening2 = noRekening2;
+    return this;
+  }
 
-    public TransaksiBuilder setWaktuTransaksi(String waktuTransaksi) {
-        this.waktuTransaksi = waktuTransaksi;
-        return this;
-    }
+  /**
+   * setWaktuTransaksi.
+   * @param waktuTransaksi waktuTransaksi.
+   * @return this.
+   */
+  public TransaksiBuilder setWaktuTransaksi(String waktuTransaksi) {
+    this.waktuTransaksi = waktuTransaksi;
+    return this;
+  }
 
-    public int getId() {
-        return id;
-    }
+  /**
+   * getId.
+   * @return id.
+   */
+  public int getId() {
+    return id;
+  }
 
-    public String getNoRekening_1() {
-        return noRekening_1;
-    }
+  /**
+   * getNoRekening1.
+   * @return noRekening1.
+   */
+  public String getNoRekening1() {
+    return noRekening1;
+  }
 
-    public String getJenis() {
-        return jenis;
-    }
+  /**
+   * GetJenis.
+   * @return jenis.
+   */
+  public String getJenis() {
+    return jenis;
+  }
 
-    public int getJumlah() {
-        return jumlah;
-    }
+  /**
+   * GetJumlah.
+   * @return jumlah.
+   */
+  public int getJumlah() {
+    return jumlah;
+  }
 
-    public String getNoRekening_2() {
-        return noRekening_2;
-    }
+  /**
+   * GetNoRekening 2.
+   * @return noRekening 2.
+   */
+  public String getNoRekening2() {
+    return noRekening2;
+  }
 
-    public String getWaktuTransaksi() {
-        return waktuTransaksi;
-    }
+  /**
+   * Get Waktu Transaksi.
+   * @return waktu transaksi.
+   */
+  public String getWaktuTransaksi() {
+    return waktuTransaksi;
+  }
 
-    public TransaksiBuilder(int id, String noRekening_1, String jenis, int jumlah, String noRekening_2, String waktuTransaksi) {
-        this.id = id;
-        this.noRekening_1 = noRekening_1;
-        this.jenis = jenis;
-        this.jumlah = jumlah;
-        this.noRekening_2 = noRekening_2;
-        this.waktuTransaksi = waktuTransaksi;
-    }
+  /**
+   * constructor.
+   * @param id id.
+   * @param noRekening1 noRekening1.
+   * @param jenis jenis.
+   * @param jumlah jumlah.
+   * @param noRekening2 noRekening2.
+   * @param waktuTransaksi waktuTransaksi.
+   */
+  public TransaksiBuilder(
+      int id, String noRekening1, String jenis, int jumlah,
+      String noRekening2, String waktuTransaksi) {
+    this.id = id;
+    this.noRekening1 = noRekening1;
+    this.jenis = jenis;
+    this.jumlah = jumlah;
+    this.noRekening2 = noRekening2;
+    this.waktuTransaksi = waktuTransaksi;
+  }
 
-    public Transaksi build(){
-        return new Transaksi(this);
-    }
+  /**
+   * Build.
+   * @return Transaksi.
+   */
+  public Transaksi build() {
+    return new Transaksi(this);
+  }
 }

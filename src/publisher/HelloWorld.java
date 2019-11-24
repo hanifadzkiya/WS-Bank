@@ -1,18 +1,29 @@
 package publisher;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
 @WebService()
 public class HelloWorld {
+  /**
+   * Hello World.
+   * @param from from.
+   * @return
+   */
   @WebMethod
   public String sayHelloWorldFrom(String from) {
-    String result = "Hello, world, from " + from;
+    String result = "Hello, world!!!!!!!, from " + from;
     System.out.println(result);
     return result;
   }
+
+  /**
+   * Main.
+   * @param argv argv.
+   */
   public static void main(String[] argv) {
-    Object implementor = new HelloWorld ();
+    Object implementor = new HelloWorld();
     String address = "http://localhost:9000/HelloWorld";
     Endpoint.publish(address, implementor);
   }

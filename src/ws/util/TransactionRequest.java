@@ -1,31 +1,51 @@
 package ws.util;
 
 public class TransactionRequest {
-    private String nomorTerkait;
-    private Double jumlah;
-    private String startTime;
-    private String endTime;
+  private String nomorTerkait;
+  private Double jumlah;
+  private String startTime;
+  private String endTime;
 
-    public TransactionRequest(TransactionRequestBuilder transactionRequest){
-        nomorTerkait = transactionRequest.getNomorTerkait();
-        jumlah = transactionRequest.getJumlah();
-        startTime = transactionRequest.getStartTime();
-        endTime = transactionRequest.getEndTime();
-    }
+  /**
+   * Constructor.
+   * @param transactionRequest transactionRequest.
+   */
+  public TransactionRequest(TransactionRequestBuilder transactionRequest) {
+    nomorTerkait = transactionRequest.getNomorTerkait();
+    jumlah = transactionRequest.getJumlah();
+    startTime = transactionRequest.getStartTime();
+    endTime = transactionRequest.getEndTime();
+  }
 
-    public String getNomorTerkait() {
-        return nomorTerkait;
-    }
+  /**
+   * Get Nomor Terkait.
+   * @return nomor terkait.
+   */
+  public String getNomorTerkait() {
+    return nomorTerkait;
+  }
 
-    public Double getJumlah() {
-        return jumlah;
-    }
+  /**
+   * Get Jumlah.
+   * @return jumlah.
+   */
+  public Double getJumlah() {
+    return jumlah;
+  }
 
-    public String getStartTime() {
-        return startTime;
-    }
+  /**
+   * Get Start Time.
+   * @return startTime.
+   */
+  public String getStartTime() {
+    return startTime;
+  }
 
-    public String getEndTime() {
-        return endTime;
-    }
+  /**
+   * Get End Time.
+   * @return end Time.
+   */
+  public String getEndTime() {
+    return endTime;
+  }
 }
